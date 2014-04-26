@@ -8,8 +8,8 @@ makeCacheMatrix <- function(x = matrix()) {
         set <- function(y){
                 x <<- y
                 mtrx <<- NULL
-        }
-        get <- function() x
+        } ## set can create a new matrix
+        get <- function() x ## get displays the current matrix, if there is one
         setInverse <- function(matrix) mtrx <<- matrix
         getInverse <- function() mtrx
         list(set = set, get = get,
@@ -26,9 +26,9 @@ cacheSolve <- function(x, ...) {
         if(!is.null(mtrx)){
                 message("getting cached data")
                 return(mtrx)
-        }
-        data <- x$get()
-        mtrx <- solve(data)
-        x$setInverse(mtrx)
+        } ## if the matrix has already been cached, this returns the cached matrix
+        data <- x$get() ## this brings the matrix into the function to use
+        mtrx <- solve(data) ## this finds the inverse of the matrix
+        x$setInverse(mtrx) ## this establishes the cached matrix
         mtrx
 }
